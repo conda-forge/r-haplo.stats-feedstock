@@ -12,29 +12,32 @@ source:
   url:
     - https://cran.r-project.org/src/contrib/haplo.stats_{{ version }}.tar.gz
     - https://cran.r-project.org/src/contrib/Archive/haplo.stats/haplo.stats_{{ version }}.tar.gz
-
   sha256: ac1d8be6d94f1ef30df801c30e98801013d330af96acf4ebd1ea8629014aec8d
 
 build:
-  merge_build_host: true  # [win]
+  merge_build_host: True  # [win]
   number: 0
-  skip: true  # [win32]
-
   rpaths:
     - lib/R/lib/
     - lib/
 
 requirements:
   build:
-    - posix                # [win]
-    - {{ compiler('c') }}        # [unix]
-    - {{ compiler('m2w64_c') }}  # [win]
+    - {{ compiler('c') }}              # [not win]
+    - {{ compiler('m2w64_c') }}        # [win]
+    - {{ posix }}filesystem        # [win]
+    - {{ posix }}make
+    - {{ posix }}sed               # [win]
+    - {{ posix }}coreutils         # [win]
+    - {{ posix }}zip               # [win]
   host:
     - r-base
+    - r-arsenal
     - r-rms
-
   run:
     - r-base
+    - {{ native }}gcc-libs         # [win]
+    - r-arsenal
     - r-rms
 
 test:
@@ -44,18 +47,15 @@ test:
 
 about:
   home: https://cran.r-project.org/web/packages/haplo.stats/index.html
-  license: GPL (>= 2)
+  license: GPL-2.0-or-later
   summary: Routines for the analysis of indirectly measured haplotypes. The statistical methods assume that all subjects are unrelated and that haplotypes are ambiguous (due to unknown linkage phase of the genetic markers). The main functions are
   license_family: GPL3
-  license_file: {{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-3
+  license_file:
+    - {{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-3
+
 extra:
   recipe-maintainers:
     - conda-forge/r
-    - dpryan79
     - MathiasHaudgaard
     - FrodePedersen
     - ArneKr
-    - johanneskoester
-    - bgruening
-    - daler
-    - jdblischak
