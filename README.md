@@ -5,11 +5,9 @@ Home: https://cran.r-project.org/web/packages/haplo.stats/index.html
 
 Package license: GPL-2.0-or-later
 
-Feedstock license: BSD-3-Clause
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/r-haplo.stats-feedstock/blob/master/LICENSE.txt)
 
 Summary: Routines for the analysis of indirectly measured haplotypes. The statistical methods assume that all subjects are unrelated and that haplotypes are ambiguous (due to unknown linkage phase of the genetic markers). The main functions are
-
-
 
 Current build status
 ====================
