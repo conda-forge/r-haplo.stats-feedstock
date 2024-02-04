@@ -1,4 +1,4 @@
-{% set version = "1.9.5" %}
+{% set version = "1.9.5.1" %}
 
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
@@ -12,7 +12,7 @@ source:
   url:
     - https://cran.r-project.org/src/contrib/haplo.stats_{{ version }}.tar.gz
     - https://cran.r-project.org/src/contrib/Archive/haplo.stats/haplo.stats_{{ version }}.tar.gz
-  sha256: e398a5fce863b088149794340ef7488c3e0cec719d1149d8e5fdbdc26eb7079e
+  sha256: 5eaf3938f50f4b95b70febe99951a1ead2ce2396756f30ef372aa65fe9f396b9
 
 build:
   merge_build_host: true  # [win]
