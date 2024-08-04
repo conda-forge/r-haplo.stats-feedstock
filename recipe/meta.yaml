@@ -1,7 +1,6 @@
 {% set version = "1.9.5.1" %}
 
 {% set posix = 'm2-' if win else '' %}
-{% set native = 'm2w64-' if win else '' %}
 
 package:
   name: r-haplo.stats
@@ -15,8 +14,7 @@ source:
   sha256: 5eaf3938f50f4b95b70febe99951a1ead2ce2396756f30ef372aa65fe9f396b9
 
 build:
-  merge_build_host: true  # [win]
-  number: 0
+  number: 1
   rpaths:
     - lib/R/lib/
     - lib/
@@ -24,7 +22,9 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}              # [not win]
+    - {{ stdlib("c") }}                # [not win]
     - {{ compiler('m2w64_c') }}        # [win]
+    - {{ stdlib("m2w64_c") }}          # [win]
     - {{ posix }}filesystem        # [win]
     - {{ posix }}make
     - {{ posix }}sed               # [win]
@@ -36,7 +36,6 @@ requirements:
     - r-rms
   run:
     - r-base
-    - {{ native }}gcc-libs         # [win]
     - r-arsenal
     - r-rms
 
