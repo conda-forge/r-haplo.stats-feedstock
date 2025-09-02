@@ -1,5 +1,4 @@
 {% set version = "1.9.7" %}
-
 {% set posix = 'm2-' if win else '' %}
 
 package:
@@ -7,7 +6,6 @@ package:
   version: {{ version|replace("-", "_") }}
 
 source:
-  fn: haplo.stats_{{ version }}.tar.gz
   url:
     - https://cran.r-project.org/src/contrib/haplo.stats_{{ version }}.tar.gz
     - https://cran.r-project.org/src/contrib/Archive/haplo.stats/haplo.stats_{{ version }}.tar.gz
@@ -18,13 +16,20 @@ build:
   rpaths:
     - lib/R/lib/
     - lib/
+  missing_dso_whitelist:
+    - '*/R.dll'        # [win]
+    - '*/Rblas.dll'    # [win]
+    - '*/Rlapack.dll'  # [win]
 
 requirements:
   build:
-    - {{ compiler('c') }}              # [not win]
-    - {{ stdlib("c") }}                # [not win]
-    - {{ compiler('m2w64_c') }}        # [win]
-    - {{ stdlib("m2w64_c") }}          # [win]
+    - cross-r-base {{ r_base }}    # [build_platform != target_platform]
+    - r-arsenal                    # [build_platform != target_platform]
+    - r-rms                        # [build_platform != target_platform]
+    - {{ compiler('c') }}          # [not win]
+    - {{ stdlib("c") }}            # [not win]
+    - {{ compiler('m2w64_c') }}    # [win]
+    - {{ stdlib("m2w64_c") }}      # [win]
     - {{ posix }}filesystem        # [win]
     - {{ posix }}make
     - {{ posix }}sed               # [win]
@@ -45,16 +50,16 @@ test:
     - "\"%R%\" -e \"library('haplo.stats')\""  # [win]
 
 about:
-  home: https://cran.r-project.org/web/packages/haplo.stats/index.html
+  home: https://analytictools.mayo.edu/research/haplo-stats/
+  dev_url: https://github.com/cran/haplo.stats
   license: GPL-2.0-or-later
   summary: Routines for the analysis of indirectly measured haplotypes. The statistical methods assume that all subjects are unrelated and that haplotypes are ambiguous (due to unknown linkage phase of the genetic markers). The main functions are
   license_family: GPL3
   license_file:
+    - {{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-2
     - {{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-3
 
 extra:
   recipe-maintainers:
     - conda-forge/r
     - MathiasHaudgaard
-    - FrodePedersen
-    - ArneKr
