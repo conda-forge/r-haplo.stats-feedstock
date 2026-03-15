@@ -7,8 +7,8 @@ package:
 
 source:
   url:
-    - https://cran.r-project.org/src/contrib/haplo.stats_{{ version }}.tar.gz
-    - https://cran.r-project.org/src/contrib/Archive/haplo.stats/haplo.stats_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/haplo.stats_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/Archive/haplo.stats/haplo.stats_{{ version }}.tar.gz
   sha256: 48c194ce34b79ef9bb66b95c783a61e4503f6c2df712f171c72cbbde7535c774
 
 build:
