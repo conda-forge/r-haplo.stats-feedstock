@@ -1,4 +1,4 @@
-{% set version = "1.9.8.3" %}
+{% set version = "1.9.8.7" %}
 {% set posix = 'm2-' if win else '' %}
 
 package:
@@ -9,7 +9,7 @@ source:
   url:
     - {{ cran_mirror }}/src/contrib/haplo.stats_{{ version }}.tar.gz
     - {{ cran_mirror }}/src/contrib/Archive/haplo.stats/haplo.stats_{{ version }}.tar.gz
-  sha256: 48c194ce34b79ef9bb66b95c783a61e4503f6c2df712f171c72cbbde7535c774
+  sha256: e187b3a38a3c9e20d94ddd04b180a53b158a7d05f0d59d4c4bd79cd37dd6603e
 
 build:
   number: 0
